@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CyptoViewers</title>
+    <script src = "https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"> </script>
+</head>
+
+    <body>
+        <h1>CyptoViewer</h1>
+
+        <div id = "trades"></div>
+        <div id = "chart"></div>
+
+        <div style="border: solid gray 1px; padding: 20px; width: 600px; margin-top: 20px;">
+            <h2>Buy Crypto</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+            <div style="padding: 10px; margin-bottom: 10px; background: #ffc0cb; border: solid #ff0000 1px; color: #ff0000;">
+
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form action="/buy" method="post">
+                <input type="text" id="quantity" name="quantity" placeholder="eg. 0.001" />
+                <select id="symbol" name="symbol">
+                    {% for symbol in symbols %}
+                        <option>{{ symbol['symbol'] }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" name="buy" value="buy" />
+            </form>
+        </div>
+
+        <h3> Settings </h3>
+
+        <div id = "Settings">
+
+                <input type="checkbox"/> RSI
+                <input type="text" id ="ris_length" name="rsi_length" placeholder = "14"/>
+                Oversold
+                <input type ="text" id="rsi_oversoild" name ="rsi_length" placeholder = "30"/>
+                Overbougth
+                <input type = "text" id ="rsi_overbought" name=""rsi_overbougth placeholder ="70"/>
+            </div>
+
+        <div id="my_balances">
+            <h2>Balances</h2>
+
+            <table>
+                {% for balance in my_balances %}
+                <tr>
+                    <td>
+                        {{ balance['asset'] }}
+                    </td>
+                    <td>
+                        {{ balance['free'] }}
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </table>
+
+        </div>
+
+            <script>
+            //var binanceSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
+            var tradeDiv = document.getElementById('trades')
+
+            //binanceSocket.onmessage = function(event){
+                //console.log(event.data)
+
+                //var messageObject = JSON.parse(event.data)
+
+        //tradeDiv.append(messageObject.p)
+    //}
+
+            </script>
+            <script src = "../static/chart2.js"> </script>
+    </body>
+</html>
