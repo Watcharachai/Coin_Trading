@@ -1,0 +1,14 @@
+python-binance
+numpy
+pandas
+flask
+TA-Lib
+json
+datetime
+config
+binance
+time 
+requests
+backtreaders
+
+
